@@ -43,6 +43,7 @@
 "use client";
 import Button from "@/components/Button";
 import Todo from "@/components/Todo";
+import { useState } from "react";
 
 let Home = () => {
   const data = [
@@ -50,22 +51,24 @@ let Home = () => {
     { title: "Active", status: false },
     { title: "Complated", status: false },
   ];
-  let test = "";
+
+  const [todos, setTodos] = useState([])
+  const [test, setTest] = useState("")
 
   let inputValue = (event) => {
-    console.log(event.target.value);
-    test = event.target.value;
+   setTest(event.target.value)
   };
   let handleOnClick = () => {
     console.log("working...");
+    setTodos([...todos,{title: test, isChecked: false}])
+    setTest("")
   };
 
-  const todos = [{ title: "todo", isChecked: true }];
-
+  
   return (
     <div className="flex flex-col gap-8">
       <div className="flex gap-2">
-        <input onChange={inputValue} className="border rounded-md" />
+        <input onChange={inputValue} className="border rounded-md" value={test}/>
         <butten
           onClick={handleOnClick}
           className="w-fit rounded-[6px] px-3 py-1 bg-[#3c82f6]"
