@@ -1,45 +1,3 @@
-// import Butten from "@/components/Butten";
-// import Image from "next/image";
-// import Hero from "@/components/Hero";
-// import ContentCardContainer from "@/components/ContentCardContainer";
-
-// let Home = () => {
-//   return (
-//     <main className="min-h-screen bg-black text-white">
-//       <Hero />
-//       <ContentCardContainer />
-//     </main>
-//   );
-// };
-
-// export default Home;
-
-// import Username from "@/components/Username";
-// import Box from "@/components/Box";
-// let Home = () => {
-//   return (
-//     <div className="flex gap-5">
-//       <Box
-//         time="10min"
-//         views="1000"
-//         comments="100"
-//         title="Unread туршив: Тоглоо&#1084;ын дур&#1084;ийг верчлех 600 долларын
-//           унэтэй MacBook"
-//         category="Techworm"
-//       ></Box>
-
-//       <Box
-//         time="5min"
-//         views="500"
-//         comments="10"
-//         title="Unread туршив: Тоглоо&#1084;ын дур&#1084;ийг верчлех 600 долларын
-//           унэтэй MacBook"
-//         category="News"
-//       ></Box>
-//     </div>
-//   );
-// };
-// export default Home;
 "use client";
 import Button from "@/components/Button";
 import Todo from "@/components/Todo";
@@ -49,7 +7,7 @@ let Home = () => {
   const data = [
     { title: "All", status: true },
     { title: "Active", status: false },
-    { title: "Complated", status: false },
+    { title: "Complated", status: true },
   ];
 
   const [todos, setTodos] = useState([])
@@ -64,6 +22,9 @@ let Home = () => {
     setTest("")
   };
 
+const deleteTask = (index) => {
+  setTodos(todos.filter((_, i) => i !== index));
+};
   
   return (
     <div className="flex flex-col gap-8">
@@ -88,7 +49,12 @@ let Home = () => {
         })}
       </div>
       {todos.map((e, i) => {
-        return <Todo title={e.title} key={i} isChecked={e.isChecked}></Todo>;
+        return <Todo 
+           title={e.title} 
+           key={i} 
+           isChecked={e.isChecked} 
+           deleteTask={deleteTask} 
+           index={i}></Todo>;
       })}
     </div>
   );
